@@ -9,4 +9,5 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/user", &controllers.MainController{})
+	beego.Router("/init/user", &controllers.OrmController{})
 }
