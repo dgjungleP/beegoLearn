@@ -1,5 +1,6 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 	"strconv"
@@ -11,6 +12,11 @@ type CharType int
 
 const INT_MAX = 2147483647
 const INT_MIN = -2147483648
+=======
+type Stat int
+type CharType int
+
+>>>>>>> 149608215afaffeba5c0e2e6948b9d94f3c22770
 const (
 	EMPTY Stat = iota
 	SIGN
@@ -29,8 +35,7 @@ func strToInt(str string) int {
 		EMPTY: map[CharType]Stat{
 			IS_EMPTY:  EMPTY,
 			IS_SIGN:   SIGN,
-			IS_NUMBER: NUMBER,
-		},
+			IS_NUMBER: NUMBER},
 		SIGN: map[CharType]Stat{
 			IS_NUMBER: NUMBER,
 		},
@@ -38,44 +43,29 @@ func strToInt(str string) int {
 			IS_NUMBER: NUMBER,
 		},
 	}
-	state := EMPTY
-	for index, character := range str {
-		charType := getType(character)
-		if value, ok := ruleMap[state][charType]; !ok {
-			result, _ := strconv.Atoi(strings.Trim(str[:index], " "))
-			if result < INT_MIN {
-				return INT_MIN
-			} else if result > INT_MAX {
-				return INT_MAX
-			}
+	charStat := EMPTY
+	var result int
+	for _, charFiled := range str {
+		if chatType, ok := ruleMap[charStat]; !ok {
 			return result
 		} else {
-			state = value
+			charStat = getType(charFiled)
 		}
 	}
-	result, _ := strconv.Atoi(strings.Trim(str, " "))
-	if result < INT_MIN {
-		return INT_MIN
-	} else if result > INT_MAX {
-		return INT_MAX
-	}
-	return result
 }
 
-func getType(character rune) CharType {
-	switch character {
-	case ' ':
-		return IS_EMPTY
+func getType(c rune) Stat {
+	switch c {
 	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-		return IS_NUMBER
-	case '-', '+':
-		return IS_SIGN
+		return NUMBER
+	case '-':
+		return SIGN
+	case ' ':
+		return EMPTY
 	default:
-		return IS_STRING
+		return STRING
 	}
 }
-
 func main() {
-	value := strToInt("-91283472332")
-	fmt.Print(value)
+
 }
