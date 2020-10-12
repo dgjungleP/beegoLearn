@@ -13,7 +13,7 @@ func pure(A *TreeNode, B *TreeNode) bool {
 
 	if A == nil && B == nil {
 		return true
-	} else if A == nil || B == nil {
+	} else if A == nil {
 		return false
 	}
 
@@ -26,19 +26,20 @@ func pure(A *TreeNode, B *TreeNode) bool {
 
 func main() {
 	A := new(TreeNode)
-	A.Val = 1
+	A.Val = 2
 	A.Left = new(TreeNode)
-	A.Left.Val = 0
+	A.Left.Val = 3
 	A.Right = new(TreeNode)
-	A.Right.Val = 1
+	A.Right.Val = 2
 	A.Left.Left = new(TreeNode)
-	A.Left.Left.Val = -4
-	A.Left.Right = new(TreeNode)
-	A.Left.Right.Val = -3
+	A.Left.Left.Val = 1
+
 	B := new(TreeNode)
 	B.Val = 1
-	B.Left = new(TreeNode)
-	B.Left.Val = -4
+	B.Right = new(TreeNode)
+	B.Right.Val = 2
+	B.Right.Left = new(TreeNode)
+	B.Right.Left.Val = 2
 	fmt.Print(isSubStructure(A, B))
 }
 
