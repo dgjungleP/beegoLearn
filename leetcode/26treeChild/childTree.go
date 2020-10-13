@@ -11,14 +11,13 @@ func isSubStructure(A *TreeNode, B *TreeNode) bool {
 
 func pure(A *TreeNode, B *TreeNode) bool {
 
-	if A == nil && B == nil {
+	if B == nil {
 		return true
 	} else if A == nil {
 		return false
 	}
 
 	if A.Val == B.Val {
-
 		return pure(A.Left, B.Left) && pure(A.Right, B.Right)
 	}
 	return false
