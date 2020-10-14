@@ -2,21 +2,32 @@ package main
 
 import "fmt"
 
-func permutation(s string) []string {
-	str := []rune(s)
+var str = make([]rune, 0)
+var result = make([]string, 0)
 
-	for i := 0; i < len(str); i++ {
-		fmt.Print(string(str[i]) + " ")
-	}
-	return nil
+func permutation(s string) []string {
+	str = []rune(s)
+	helper(0)
+	return result
 }
 
-func helper(str []rune, index int) {
+func helper(index int) {
 	if index == len(str)-1 {
+		result = append(result, string(str[:]))
 		return
 	}
+	var chartMap = make(map[rune]int)
+	for i := index; i < len(str); i++ {
+		if _, ok := chartMap[str[i]]; ok {
+			continue
+		}
+		chartMap[str[i]] = 1
+		str[i], str[index] = str[index], str[i]
+		helper(index + 1)
+		str[i], str[index] = str[index], str[i]
+	}
 }
-func main() {
 
-	permutation("hello")
+func main() {
+	fmt.Print(permutation("abc"))
 }
