@@ -20,6 +20,7 @@ func (this *MedianFinder) AddNum(num int) {
 }
 
 func (this *MedianFinder) FindMedian() float64 {
+
 	if this.size&1 == 1 {
 		return float64(this.data[this.size/2])
 	} else {
